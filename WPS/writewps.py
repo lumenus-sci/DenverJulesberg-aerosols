@@ -1,21 +1,21 @@
 ## Script for writing the namelists for WPS
 
 seqs = ['wps_geoungrib', 'metgrid']
-start_dates = ['YYYY-MM-DD_HH:00:00','YYYY-MM-DD_HH:00:00'] #! must be strings and must be in this format
-end_dates = ['YYYY-MM-DD_HH:00:00','YYYY-MM-DD_HH:00:00'] #! must be strings and must be in this format
+start_dates = ['2024-07-12_00:00:00','2024-07-12_00:00:00'] #! must be strings and must be in this format
+end_dates = ['2024-07-15_00:00:00','2024-07-15_00:00:00'] #! must be strings and must be in this format
 output_dir = './' # where you want to output geogrid/metgrid files
 e_we_d01 = 443 #! Do not change. CONUS domain
 e_sn_d01 = 266 #! Do not change. CONUS domain
-e_we_d02 = 301 #* Update for the project
-e_sn_d02 = 256 #* Update for the project
+e_we_d02 = 541 #* Update for the project
+e_sn_d02 = 706 #* Update for the project
 parent_grid_ratio_d02 = 15 #* Update for project (dx and dy for d02 will be d01_dx/grid_ratio or d01_dy/grid_ratio)
-i_parent_start_d02 = 372 #* Update for the project (use WRF_Domain_Wizard)
-j_parent_start_d02 = 154 #* Update for the project (use WRF_Domain_Wizard)
+i_parent_start_d02 = 155 #* Update for the project (use WRF_Domain_Wizard)
+j_parent_start_d02 = 118 #* Update for the project (use WRF_Domain_Wizard)
 dxy = 12000 #! Do not change. CONUS domain/base dx and dy for nests in meters
 ref = (40, -97) #! Do not change. CONUS domain
 true_lats = (33, 45) #! Do not change. CONUS domain.
 wps_dir = '/work2/07655/tg869546/stampede3/WRF-4.5.2/WPS/WPS-4.5' #* Update for where your WPS files are
-ungrib_prefix = 'GFS' #* Update for what your meteorology IC/BC files are
+ungrib_prefix = 'MERRA' #* Update for what your meteorology IC/BC files are
 
 
 for seq, start_date, end_date in zip(seqs, start_dates, end_dates):
