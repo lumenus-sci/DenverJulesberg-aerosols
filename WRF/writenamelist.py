@@ -1,18 +1,18 @@
 #! Script that writes out the namelists for a multi-stage WRF run. Options at the beginning can be edited to the length and details of the simulation
 
-seqs = ['real', *(x for x in range(1,49))] #must contain 'real' at the beginning
-sdays = [20, *(x for x in range(20,32) for _ in (0,1)), *(x for x in range(1,13) for _ in (0,1))] #must contain the start for entire sim at beginning
-edays = [13, 20, *(x for x in range(21,32) for _ in (0,1)), *(x for x in range(1,13) for _ in (0,1)), 13] #must have end of entire sim at beginning
-smons = [*([7] * 25), *([8] * 24)] #must have start of entire sim at beginning
-emons = [8, *([7] * 23), *([8] * 25)] #must have end of entire sim at beginning
-shrs = [0, *([0, 12] * 24)] #must have start of entire sim at beginning
-ehrs = [0, *([12, 0] * 24)] #must have end of entire sim at beginning
-syrs = [*([2023] * 49)]
-eyrs = [*([2023] * 49)]
+seqs = ['real', *(x for x in range(1,7))] #must contain 'real' at the beginning
+sdays = [12, *(x for x in range(12,15) for _ in (0,1))] #must contain the start for entire sim at beginning
+edays = [15, 12, *(x for x in range(13,15) for _ in (0,1)),15] #must have end of entire sim at beginning
+smons = [*([7] * 7)] #must have start of entire sim at beginning
+emons = [*([7] * 7)] #must have end of entire sim at beginning
+shrs = [0, *([0, 12] * 3)] #must have start of entire sim at beginning
+ehrs = [0, *([12, 0] * 3)] #must have end of entire sim at beginning
+syrs = [*([2024] * 7)]
+eyrs = [*([2024] * 7)]
 e_we_d01 = 443
-e_we_d02 = 301
+e_we_d02 = 541
 e_sn_d01 = 266
-e_sn_d02 = 256
+e_sn_d02 = 706
 i_parent_start_d02 = 372
 j_parent_start_d02 = 154
 
@@ -88,8 +88,8 @@ for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sd
         fl.write(f'parent_time_step_ratio              = 1,   15,    5,    5,\n')
         fl.write(f'feedback                            = 0,\n')
         fl.write(f'smooth_option                       = 0,\n')
-        fl.write(f'num_metgrid_levels                  = 34,\n')
-        fl.write(f'num_metgrid_soil_levels             = 4,\n')
+        fl.write(f'num_metgrid_levels                  = 73,\n')
+        fl.write(f'num_metgrid_soil_levels             = 5,\n')
         fl.write(f'interp_type                         = 2,\n')
         fl.write(f'lagrange_order                      = 2,\n')
         fl.write(f'zap_close_levels                    = 500,\n')
@@ -111,16 +111,16 @@ for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sd
         fl.write(f'/\n')
         fl.write(f'\n')
         fl.write(f'&physics\n')
-        fl.write(f'mp_physics                          = 10,     10,     10,     10,     10,\n')
+        fl.write(f'mp_physics                          = 4,     4,     4,     4,     4,\n')
         fl.write(f'do_radar_ref           = 1 ,\n')
-        fl.write(f'ra_lw_physics                       = 1,     1,     1,     1,\n') 
-        fl.write(f'ra_sw_physics                       = 1,     1,     1,     1,\n') 
+        fl.write(f'ra_lw_physics                       = 4,     4,     4,     4,\n') 
+        fl.write(f'ra_sw_physics                       = 4,     4,     4,     4,\n') 
         fl.write(f'radt                                = 30,    30,    30,   30,\n') 
         fl.write(f'sf_sfclay_physics                   = 1,     1,     1,     1,\n')
         fl.write(f'sf_surface_physics                  = 2,     2,     2,     2,\n')
-        fl.write(f'bl_pbl_physics                      = 11,    11,     0,     0,\n')
+        fl.write(f'bl_pbl_physics                      = 1,     1,     0,     0,\n')
         fl.write(f'bldt                                = 0,     0,     0,     0,\n')
-        fl.write(f'cu_physics                          = 3,     3,     0,     0,\n')
+        fl.write(f'cu_physics                          = 5,     5,     0,     0,\n')
         fl.write(f'cu_rad_feedback                     = .true.\n')
         fl.write(f'cu_diag                             = 1,     1,     0,     0,\n')
         fl.write(f'cudt                                = 5,     5,     5,     5,\n')
@@ -129,7 +129,7 @@ for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sd
         fl.write(f'icloud                              = 1,\n')
         fl.write(f'surface_input_source                = 1,\n')
         fl.write(f'sst_update                          = 0, ! if input_from_file false, sst_update needs to be 0\n')
-        fl.write(f'num_soil_layers                     = 4,\n')
+        fl.write(f'num_soil_layers                     = 5,\n')
         fl.write(f'maxiens                             = 1,\n')
         fl.write(f'maxens                              = 3,\n')
         fl.write(f'maxens2                             = 3,\n')
@@ -226,7 +226,7 @@ for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sd
         fl.write(f'/\n')
         fl.write(f'&chem\n')
         fl.write(f'kemit                               = 12,\n')
-        fl.write(f'chem_opt                            = 17,      17,      17,      17,      17,\n')
+        fl.write(f'chem_opt                            = 300,      300,      300,      300,      300,\n')
         fl.write(f"vprm_opt                            = 'VPRM_table_US', 'VPRM_table_US', 'VPRM_table_US','VPRM_table_US','VPRM_table_US',\n")
         fl.write(f'bioemdt                             = 30,       30,       30,       30,       30,\n')
         fl.write(f'photdt                              = 30,       30,       30,       30,       30,\n')
@@ -234,12 +234,12 @@ for seq, syr, smon, sday, shr, eyr, emon, eday, ehr in zip(seqs, syrs, smons, sd
         fl.write(f'io_style_emissions                  = 1,\n')
         fl.write(f'emiss_inpt_opt                      = 16,        16,        16,        16,        16,\n')
         fl.write(f'emiss_opt                           = 17,        17,        17,        17,        17,\n')
-        fl.write(f'chem_in_opt                         = 0,        0,        0,        0,        0,\n')
+        fl.write(f'chem_in_opt                         = 1,        1,        1,        1,        1,\n')
         fl.write(f'phot_opt                            = 1,        1,        1,       1,       1,\n')
         fl.write(f'gas_drydep_opt                      = 0,        0,        0,        0,        0,\n')
         fl.write(f'bio_emiss_opt                       = 17,        17,        17,        17,        17,\n')
         fl.write(f'ne_area                             = 60,\n')
-        fl.write(f'dust_opt                            = 0,\n')
+        fl.write(f'dust_opt                            = 1,\n')
         fl.write(f'dmsemis_opt                         = 0,\n')
         fl.write(f'seas_opt                            = 0,\n')
         fl.write(f'gas_bc_opt                          = 1,        1,        1,        1,        1,\n')
